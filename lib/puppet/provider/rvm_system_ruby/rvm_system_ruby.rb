@@ -15,7 +15,8 @@ Puppet::Type.type(:rvm_system_ruby).provide(:rvm) do
       rvmcmd "pkg install", resource[:pkg]
     end
 
-    rvmcmd "install", resource[:name]
+    options = resource[:withopts]
+    rvmcmd "install", resource[:name], options
     set_default if resource.value(:default_use)
   end
 
