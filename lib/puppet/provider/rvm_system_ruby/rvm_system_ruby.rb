@@ -10,6 +10,11 @@ Puppet::Type.type(:rvm_system_ruby).provide(:rvm) do
 
 
   def create
+    if resource[:pkg]
+      puts "rvmcmd pkg install #{resource[:pkg]}"
+      rvmcmd "pkg install", resource[:pkg]
+    end
+
     rvmcmd "install", resource[:name]
     set_default if resource.value(:default_use)
   end
